@@ -12,7 +12,7 @@ For the most up-to-date version of LVGL please visit: https://github.com/lvgl/lv
 ```
 git clone https://github.com/epichl25/STM32H7B3I-DK_LVGL.git
 ```
-2. Open up STM32CUBEIDE
+2. Open STM32CUBEIDE
 3. Create a new workspace
 4. Import the project folder: File => Import => General => Existing Projects into Workspace => Select the "STM32H7B3I-DK_LVGL-main" folder => Finish
 5. Build the project: Project => Build all

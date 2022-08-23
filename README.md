@@ -5,3 +5,8 @@ This repository contains the Light and Versatile Graphics Library (LVGL) port fo
 This project uses LVGL v8.3.1
 
 For the most up-to-date version of LVGL please visit: https://github.com/lvgl/lvgl
+
+
+How to import this project:
+Open up STM32CUBEIDE
+File => Import => General => Existing Projects into Workspace => Select the "STM32H7B3I-DK_LVGL-main" folder => Finish

@@ -4,4 +4,4 @@ This repository contains the Light and Versatile Graphics Library (LVGL) port fo
 
 This project uses LVGL v8.3.1
 
-For the most up-to-date version of LVGL, please visit: https://github.com/lvgl/lvgl
+For the most up-to-date version of LVGL please visit: https://github.com/lvgl/lvgl

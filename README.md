@@ -28,7 +28,7 @@ Two rendering methods are available.
 This method simply writes pixels one by one using loops.
 
 #### 2. dma2d
-This method uses the dma2d hardware accelerator available on the development board to speed up the rendering performance. Compared to the "simple" method, the use of dma2d significantly improves its rendering performance.
+This method uses the dma2d hardware accelerator available on the development board to speed up the rendering performance. Compared to the "simple" method, this method significantly improves its rendering performance.
 
 ## How to change the rendering mode
 Navigate to "hal_stm_lvgl/tft/tft.c" and change the defines for simple and dma2d to either "0" or "1". 

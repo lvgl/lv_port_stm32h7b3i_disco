@@ -36,8 +36,7 @@
  *      TYPEDEFS
  **********************/
 #if dma2d
-/* DMA2D Transfer Complete flag */
-__IO uint32_t   transferCompleteDetected = 0;  //DMA2D transfer complete flag
+__IO uint32_t   transferCompleteDetected = 0;  /* DMA2D Transfer Complete flag */
 HAL_StatusTypeDef HAL_Status = HAL_OK;
 #endif
 /**********************
@@ -49,7 +48,7 @@ static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
 static void ex_disp_clean_dcache(lv_disp_drv_t *drv);
 
 #if dma2d
-static void DMA2D_Config(void *pSrc, void *pDst, uint32_t xSize,uint32_t ySize);
+static void DMA2D_Config(void);
 static void TransferComplete(DMA2D_HandleTypeDef *hlcd_dma2d);
 static void TransferError(DMA2D_HandleTypeDef *hlcd_dma2d);
 #endif
@@ -188,7 +187,7 @@ static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
 		SCB_InvalidateICache();
 		uint32_t address = hlcd_ltdc.LayerCfg[Lcd_Ctx[0].ActiveLayer].FBStartAdress + (((Lcd_Ctx[0].XSize*area->y1) + area->x1)*Lcd_Ctx[0].BppFactor);
 
-		DMA2D_Config((uint32_t)buf_to_flush, address,lv_area_get_width(area), lv_area_get_height(area));
+		DMA2D_Config();
 
 		HAL_Status = HAL_DMA2D_Start_IT(&hlcd_dma2d,
 									   (uint32_t)buf_to_flush,               /* Color value in Register to Memory DMA2D mode */
@@ -220,7 +219,7 @@ static void ex_disp_clean_dcache(lv_disp_drv_t *drv)
   *  None
   */
 
-static void DMA2D_Config(void *pSrc, void *pDst, uint32_t xSize,uint32_t ySize)
+static void DMA2D_Config(void)
 {
 
 	/* Configure the DMA2D Mode, Color Mode and output offset */

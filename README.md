@@ -24,7 +24,7 @@ git clone https://github.com/epichl25/STM32H7B3I-DK_LVGL.git
 
 ### 26.8.2022
 Two rendering methods are available. 
-#### 1. Simple 
+#### 1. simple 
 This method simply writes pixels one by one using loops.
 
 #### 2. dma2d

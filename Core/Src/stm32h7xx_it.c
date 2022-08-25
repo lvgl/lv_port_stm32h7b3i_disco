@@ -26,6 +26,8 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_hal_cortex.h"
 
+#include "stm32h7b3i_discovery_lcd.h"
+
 #include "lvgl/src/hal/lv_hal_tick.h"
 #include "hal_stm_lvgl/tft/tft.h"
 /* USER CODE END Includes */
@@ -63,7 +65,7 @@
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
-DMA2D_HandleTypeDef hdma2d;
+
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -216,7 +218,8 @@ void DMA2D_IRQHandler(void)
   /* USER CODE BEGIN DMA2D_IRQn 0 */
 
   /* USER CODE END DMA2D_IRQn 0 */
-  HAL_DMA2D_IRQHandler(&hdma2d);
+  HAL_DMA2D_IRQHandler(&hlcd_dma2d);
+
   /* USER CODE BEGIN DMA2D_IRQn 1 */
 
   /* USER CODE END DMA2D_IRQn 1 */

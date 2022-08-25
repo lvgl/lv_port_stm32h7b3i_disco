@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 /* USER CODE BEGIN Includes */
+#include "stm32h7b3i_discovery_lcd.h"
 
 /* USER CODE END Includes */
 
@@ -76,5 +77,14 @@ void HAL_MspInit(void)
 }
 
 /* USER CODE BEGIN 1 */
+void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hlcd_dma2d)
+{
+  /*##-1- Enable peripherals and GPIO Clocks #################################*/
+  __HAL_RCC_DMA2D_CLK_ENABLE();
 
+  /*##-2- NVIC configuration  ################################################*/
+  /* NVIC configuration for DMA2D transfer complete interrupt */
+  HAL_NVIC_SetPriority(DMA2D_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+}
 /* USER CODE END 1 */

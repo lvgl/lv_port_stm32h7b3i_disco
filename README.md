@@ -22,7 +22,7 @@ git clone https://github.com/epichl25/STM32H7B3I-DK_LVGL.git
 ## Update Information
 
 ### 26.8.2022
-DMA2D rendering was added to the project.
+DMA2D support was added to the project.
 
 1. simple
 This mode uses loops to write to pixels to render a GUI on the display.

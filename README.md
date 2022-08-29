@@ -41,11 +41,11 @@ Opa. speed: 92%
 2. dma2d:
 Weighted FPS: 76 
 Opa. speed: 83%
-Rendering method | simple | dma2d |
----------------- | ------ | ----- |
-Weighted FPS     | 40 | 76        | 
----------------- | --- | -------- |
-Opa. speed       | 92% | 83%      | 
+| Rendering method | simple | dma2d |
+| ---------------- | ------ | ----- |
+| Weighted FPS     | 40 | 76        | 
+| ---------------- | --- | -------- |
+| Opa. speed       | 92% | 83%      | 
 
 ### How to change rendering modes
 1. Navigate to "hal_stm_lvgl/tft/tft.c" 

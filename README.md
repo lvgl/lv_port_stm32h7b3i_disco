@@ -40,3 +40,5 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 2. Locate the defines "simple" and "dma2d"
 3. Enable on of the defines. Do NOT enable both modes simultaneously. 
 
+## TODO
+Add supoort for SDRAM buffers and test performance.

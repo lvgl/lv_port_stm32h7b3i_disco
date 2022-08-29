@@ -40,7 +40,7 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 | Opa. speed       |   92%  |  83%  |
 
 
-### How to change rendering modes
+## How to change rendering modes
 1. Navigate to "hal_stm_lvgl/tft/tft.c" 
 2. Locate the defines "simple" and "dma2d"
 3. Enable on of the defines. Do NOT enable both modes simultaneously. 

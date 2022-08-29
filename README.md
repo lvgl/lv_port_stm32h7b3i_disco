@@ -32,6 +32,21 @@ This mode uses loops to write to pixels to render a GUI on the display.
 
 This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rendering. Compared to the "simple" mode, this mode significantly improves performance and reduces stuttering.
 
+### Benchmark Results
+
+1. simple
+Weighted FPS: 40 
+Opa. speed: 92%
+
+2. dma2d:
+Weighted FPS: 76 
+Opa. speed: 83%
+Rendering method | simple | dma2d |
+---------------- | --- | ---------|
+Weighted FPS     | 40 | 76        | 
+---------------- | --- | ---------|
+Opa. speed       | 92% | 83%      | 
+
 ### How to change rendering modes
 1. Navigate to "hal_stm_lvgl/tft/tft.c" 
 2. Locate the defines "simple" and "dma2d"

@@ -34,7 +34,6 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 
 
 ### Benchmark Results
-
 | Rendering method | simple | dma2d |
 | :---             |  :---: | :---: |
 | Weighted FPS     |   40   |  76   |

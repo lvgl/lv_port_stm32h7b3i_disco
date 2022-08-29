@@ -42,3 +42,4 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 
 ## TODO
 Add supoort for SDRAM buffers and test performance.
+

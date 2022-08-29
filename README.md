@@ -22,13 +22,8 @@ git clone https://github.com/epichl25/STM32H7B3I-DK_LVGL.git
 ## Update Information
 
 ### 26.8.2022
+
 DMA2D support was added to the project.
-
-1. simple
-
-This mode uses loops to write to pixels to render a GUI on the display.
-
-2. dma2d
 
 This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rendering. Compared to the "simple" mode, this mode significantly improves performance and reduces stuttering.
 

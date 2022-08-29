@@ -28,7 +28,7 @@ DMA2D support was added to the project.
 This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rendering. Compared to the "simple" mode, this mode significantly improves performance and reduces stuttering.
 
 
-### Benchmark Results
+## Benchmark Results
 | Rendering method | simple | dma2d |
 | :---             |  :---: | :---: |
 | Weighted FPS     |   40   |  76   |
@@ -39,3 +39,7 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 1. Navigate to "hal_stm_lvgl/tft/tft.c" 
 2. Locate the defines "simple" and "dma2d"
 3. Enable on of the defines. Do NOT enable both modes simultaneously. 
+
+
+## TODO
+Use SDRAM to improve performance.

@@ -29,6 +29,9 @@ This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rend
 
 
 ## Benchmark Results
+
+The benchmark demo found in LVGL's demos was used to benchmark the performance of the STM32H8B3I-DK.
+
 | Rendering method | simple | dma2d |
 | :---             |  :---: | :---: |
 | Weighted FPS     |   40   |  76   |

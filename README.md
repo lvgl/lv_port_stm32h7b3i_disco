@@ -1,4 +1,4 @@
-# STM32H7B3I-DK_LVGL
+# lv_port_stm32h7b3i_disco
 
 This repository contains the Light and Versatile Graphics Library (LVGL) port for the STM32H7B3I-DK development board. 
 

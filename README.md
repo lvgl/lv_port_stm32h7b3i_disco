@@ -10,7 +10,7 @@ For the most up-to-date version of LVGL please visit: https://github.com/lvgl/lv
 ## How to import this project to STM32CUBEIDE:
 1. Clone this respository: 
 ```
-git clone https://github.com/epichl25/STM32H7B3I-DK_LVGL.git
+git clone https://github.com/epichl25/lv_port_stm32h7b3i_disco.git
 ```
 2. Open STM32CUBEIDE
 3. Create a new workspace

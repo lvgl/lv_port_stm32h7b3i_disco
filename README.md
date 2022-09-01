@@ -48,5 +48,7 @@ NOTE: The simple rendering method is set by default. For better performance, ple
 3. Change '0' to '1' to enable DMA2D.  
 
 ## TODO
+Add a demo pic
+Add a troubleshooting guide
 Add support for SDRAM buffers and test performance.
 

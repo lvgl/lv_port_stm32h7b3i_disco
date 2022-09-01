@@ -14,7 +14,7 @@ git clone https://github.com/epichl25/lv_port_stm32h7b3i_disco.git
 ```
 2. Open STM32CUBEIDE
 3. Create a new workspace
-4. Import the project: File => Import => General => Existing Projects into Workspace => Browse => Select the "STM32H7B3I-DK_LVGL-main" folder => Finish
+4. Import the project: File => Import => General => Existing Projects into Workspace => Browse => Select the "lv_port_stm32h7b3i_disco" folder => Finish
 5. Build the project: Project => Build all
 6. Upload the firmware to the development board: Run
 
@@ -48,7 +48,7 @@ NOTE: The simple rendering method is set by default. For better performance, ple
 3. Change '0' to '1' to enable DMA2D.  
 
 ## TODO
-Add a demo pic
-Add a troubleshooting guide
-Add support for SDRAM buffers and test performance.
+1. Add a demo pic
+2. Add a troubleshooting guide
+3. Add support for SDRAM buffers and test performance.
 

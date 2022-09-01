@@ -21,33 +21,25 @@
 /*********************
  *      DEFINES
  *********************/
-
 #if LV_COLOR_DEPTH != 16 && LV_COLOR_DEPTH != 24 && LV_COLOR_DEPTH != 32
 #error LV_COLOR_DEPTH must be 16, 24, or 32
 #endif
 
-
-/*  CONFIGURATION  */
-#define simple 0 //Set to '1' to use simple display mode
-#define dma2d 1  //Set to '1' to use STM32's hardware DMA2D GPU
-
-
 /**********************
  *      TYPEDEFS
  **********************/
-#if dma2d
+#if LV_USE_GPU_STM32_DMA2D
 __IO uint32_t   transferCompleteDetected = 0;  /* DMA2D Transfer Complete flag */
 HAL_StatusTypeDef HAL_Status = HAL_OK;
 #endif
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-
 /*These 3 functions are needed by LittlevGL*/
 static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t * color_p);
 static void ex_disp_clean_dcache(lv_disp_drv_t *drv);
 
-#if dma2d
+#if LV_USE_GPU_STM32_DMA2D
 static void DMA2D_Config(uint32_t xSize);
 static void TransferComplete(DMA2D_HandleTypeDef *hlcd_dma2d);
 static void TransferError(DMA2D_HandleTypeDef *hlcd_dma2d);
@@ -64,14 +56,9 @@ typedef uint16_t uintpixel_t;
 typedef uint32_t uintpixel_t;
 #endif
 
-/* You can try to change buffer to internal ram by uncommenting line below and commenting
- * SDRAM one. */
-static uintpixel_t my_fb[TFT_HOR_RES * TFT_VER_RES];
-//static __IO uintpixel_t * my_fb = (__IO uintpixel_t*) (0x60000000);
-
 static lv_disp_t *our_disp = NULL;
 
-#if dma2d
+#if LV_USE_GPU_STM32_DMA2D
 static int32_t            x1_flush;
 static int32_t            y1_flush;
 static int32_t            x2_flush;
@@ -142,23 +129,7 @@ void tft_init(void)
  * This function is required only when LV_VDB_SIZE != 0 in lv_conf.h*/
 static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t * color_p)
 {
-
-#if simple
-
-		int32_t x;
-	    int32_t y;
-	    for(y = area->y1; y <= area->y2; y++) {
-	        for(x = area->x1; x <= area->x2; x++) {
-	            /* Put a pixel to the display. For example: */
-	            /* put_px(x, y, *color_p)*/
-	        	BSP_LCD_WritePixel(0,x, y, color_p->full);
-	            color_p++;
-	        }
-	    }
-	    lv_disp_flush_ready(&disp_drv);
-#endif
-
-#if dma2d
+#if LV_USE_GPU_STM32_DMA2D
 	    int32_t x1 = area->x1;
 		int32_t x2 = area->x2;
 		int32_t y1 = area->y1;
@@ -200,7 +171,21 @@ static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
 		  lv_disp_flush_ready(&disp_drv);
 
 		  return;
+
+#else
+		int32_t x;
+	    int32_t y;
+	    for(y = area->y1; y <= area->y2; y++) {
+	        for(x = area->x1; x <= area->x2; x++) {
+	            /* Put a pixel to the display. For example: */
+	            /* put_px(x, y, *color_p)*/
+	        	BSP_LCD_WritePixel(0,x, y, color_p->full);
+	            color_p++;
+	        }
+	    }
+	    lv_disp_flush_ready(&disp_drv);
 #endif
+
 }
 
 
@@ -209,7 +194,7 @@ static void ex_disp_clean_dcache(lv_disp_drv_t *drv)
     SCB_CleanInvalidateDCache();
 }
 
-#if dma2d
+#if LV_USE_GPU_STM32_DMA2D
 /**
   * @brief DMA2D configuration.
   * @note  This function Configure the DMA2D peripheral :

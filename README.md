@@ -87,3 +87,13 @@ Below lists some common problems users might face when using this project.
 
 ## TODO
 Add support for SDRAM buffers and test performance.
+
+## Credits
+
+- @epichl25
+Original creator of this repository.
+GitHub page link: https://github.com/epichl25
+
+- @kisvegabor
+Creator of LVGL
+GitHub page link: https://github.com/kisvegabor

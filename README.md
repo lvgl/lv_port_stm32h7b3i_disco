@@ -44,7 +44,7 @@ The benchmark demo firmware found in LVGL's demos was used to benchmark performa
 ## How to change rendering mode from default to DMA2D mode
 NOTE: The simple rendering method is set by default. For better performance, please enable DMA2D mode.
 1. Navigate to "lv_conf.h" 
-2. Locate the define "LV_USE_GPU_STM32_DMA2D" found under GPU.
+2. Locate the define "LV_USE_GPU_STM32_DMA2D" found in the GPU section.
 3. Change '0' to '1' to enable DMA2D.  
 
 ## TODO

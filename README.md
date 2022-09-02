@@ -50,5 +50,6 @@ NOTE: The simple rendering method is set by default. For better performance, ple
 ## TODO
 1. Add a demo pic
 2. Add a troubleshooting guide
-3. Add support for SDRAM buffers and test performance.
+3. Add development board's specifications
+4. Add support for SDRAM buffers and test performance.
 

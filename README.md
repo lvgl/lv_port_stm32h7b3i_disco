@@ -92,8 +92,8 @@ Add support for SDRAM buffers and test performance.
 
 - @epichl25
 Original creator of this repository.
-GitHub page link: https://github.com/epichl25
+<br />GitHub page link: https://github.com/epichl25
 
 - @kisvegabor
 Creator of LVGL
-GitHub page link: https://github.com/kisvegabor
+<br />GitHub page link: https://github.com/kisvegabor

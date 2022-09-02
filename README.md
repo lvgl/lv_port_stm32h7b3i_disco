@@ -27,7 +27,7 @@ DMA2D support was added to the project.
 This method uses the Chrom-Art Accelerator found in STM32H7B3I-DK's MCU for rendering. Compared to the "simple" mode, this mode significantly improves performance and reduces stuttering.
 
 ### 2.9.2022
-1. The project defaults to using the "simple" mode to render on the display. Using STM32's DMA2D is now possible by enabling the define "LV_USE_GPU_STM32_DMA2D" found in lv_conf.h.
+1. The project defaults to using the "simple" mode to render. Using STM32's DMA2D must now be enabled by changing the value of the define "LV_USE_GPU_STM32_DMA2D" found in lv_conf.h.
 
 2. The project was re-formatted to confrom with LVGL's project structure for stm32 projects.
 

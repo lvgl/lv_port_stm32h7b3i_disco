@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7b3i_discovery_conf.h"
 #include "stm32h7b3i_discovery_errno.h"
-#include "../Components/m24lr64/m24lr64.h"
+#include "../Components/M24LR64/m24lr64.h"
 
 /** @addtogroup BSP
   * @{

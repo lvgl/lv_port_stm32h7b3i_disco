@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7b3i_discovery_conf.h"
 #include "stm32h7b3i_discovery_errno.h"
-#include "../Components/is42s16800j/is42s16800j.h"
+#include "../Components/IS42S16800J/is42s16800j.h"
 
 /** @addtogroup BSP
   * @{

@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7b3i_discovery_conf.h"
 #include "stm32h7b3i_discovery_errno.h"
-#include "../Components/ft5336/ft5336.h"
+#include "../Components/FT5336/ft5336.h"
 
 /** @addtogroup BSP
   * @{

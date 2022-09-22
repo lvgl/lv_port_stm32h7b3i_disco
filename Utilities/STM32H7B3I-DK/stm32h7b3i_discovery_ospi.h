@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7b3i_discovery_conf.h"
 #include "stm32h7b3i_discovery_errno.h"
-#include "../Components/mx25lm51245g/mx25lm51245g.h"
+#include "../Components/MX25LM51245G/mx25lm51245g.h"
 
 /** @addtogroup BSP
   * @{

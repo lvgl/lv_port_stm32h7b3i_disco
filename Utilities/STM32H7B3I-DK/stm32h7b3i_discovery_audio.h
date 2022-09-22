@@ -31,7 +31,7 @@
 #include "stm32h7b3i_discovery_errno.h"
 #include "../Common/audio.h"
 /* Include audio component Driver */
-#include "../Components/cs42l51/cs42l51.h"
+#include "../Components/CS42L51/cs42l51.h"
 
 /** @addtogroup BSP
   * @{

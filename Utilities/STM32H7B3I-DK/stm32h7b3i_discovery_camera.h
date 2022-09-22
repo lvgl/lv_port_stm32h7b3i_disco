@@ -35,7 +35,7 @@
 #endif
 
 #if (USE_CAMERA_SENSOR_OV9655 == 1)
-#include "../Components/ov9655/ov9655.h"
+#include "../Components/OV9655/ov9655.h"
 #endif
 
 /** @addtogroup BSP

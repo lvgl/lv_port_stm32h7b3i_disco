@@ -184,7 +184,7 @@ static void TIMx_PWM_Init(TIM_HandleTypeDef *htim);
   */
 int32_t BSP_LCD_Init(uint32_t Instance, uint32_t Orientation)
 {
-  return BSP_LCD_InitEx(Instance, Orientation, LCD_PIXEL_FORMAT_RGB888, LCD_DEFAULT_WIDTH, LCD_DEFAULT_HEIGHT);
+  return BSP_LCD_InitEx(Instance, Orientation, LCD_PIXEL_FORMAT_RGB565, LCD_DEFAULT_WIDTH, LCD_DEFAULT_HEIGHT);
 }
 
 /**

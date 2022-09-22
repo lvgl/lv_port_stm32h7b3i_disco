@@ -173,15 +173,16 @@ static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t 
 		  return;
 
 #else
-		int32_t x;
+		uint16_t * fb = (uint16_t *) LCD_LAYER_0_ADDRESS;
+		uint16_t stride = disp_drv.hor_res;
+		fb += area->y1 * stride;
+		fb += area->x1;
+		lv_coord_t w = lv_area_get_width(area);
 	    int32_t y;
 	    for(y = area->y1; y <= area->y2; y++) {
-	        for(x = area->x1; x <= area->x2; x++) {
-	            /* Put a pixel to the display. For example: */
-	            /* put_px(x, y, *color_p)*/
-	        	BSP_LCD_WritePixel(0,x, y, color_p->full);
-	            color_p++;
-	        }
+			lv_memcpy(fb, color_p, w * 2);
+			fb += stride;
+			color_p += w;
 	    }
 	    lv_disp_flush_ready(&disp_drv);
 #endif

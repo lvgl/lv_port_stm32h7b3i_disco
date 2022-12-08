@@ -25,6 +25,8 @@
 #error LV_COLOR_DEPTH must be 16, 24, or 32
 #endif
 
+#define TFT_FULL_REFRESH	0
+
 /**********************
  *      TYPEDEFS
  **********************/
@@ -88,13 +90,16 @@ void tft_init(void)
 	* Create a buffer for drawing
 	*----------------------------*/
 
-   /* LittlevGL requires a buffer where it draws the objects. The buffer's has to be greater than 1 display row*/
+   /* LVGL requires a buffer where it draws the objects. The buffer's has to be greater than 1 display row*/
 
 	static lv_disp_draw_buf_t disp_buf_1;
-	static lv_color_t buf1_1[TFT_HOR_RES * 68];
-	static lv_color_t buf1_2[TFT_HOR_RES * 68];
-
-	lv_disp_draw_buf_init(&disp_buf_1, buf1_1, buf1_2, TFT_HOR_RES * 68);   /*Initialize the display buffer*/
+#if TFT_FULL_REFRESH
+	static lv_color_t fb[2][TFT_HOR_RES*TFT_VER_RES];
+	lv_disp_draw_buf_init(&disp_buf_1, fb[0], fb[1], TFT_HOR_RES * TFT_VER_RES);   /*Initialize the display buffer*/
+#else
+	static lv_color_t buf[TFT_HOR_RES * 68];
+	lv_disp_draw_buf_init(&disp_buf_1, buf, NULL, TFT_HOR_RES * 68);   /*Initialize the display buffer*/
+#endif
 
 	/*-----------------------------------
 	* Register the display in LittlevGL
@@ -111,6 +116,7 @@ void tft_init(void)
 	/*Used to copy the buffer's content to the display*/
 	disp_drv.flush_cb = ex_disp_flush;
 	disp_drv.clean_dcache_cb = ex_disp_clean_dcache;
+	disp_drv.full_refresh = TFT_FULL_REFRESH;
 
 	/*Set a display buffer*/
 	disp_drv.draw_buf = &disp_buf_1;
@@ -129,64 +135,22 @@ void tft_init(void)
  * This function is required only when LV_VDB_SIZE != 0 in lv_conf.h*/
 static void ex_disp_flush(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t * color_p)
 {
-#if LV_USE_GPU_STM32_DMA2D
-	    int32_t x1 = area->x1;
-		int32_t x2 = area->x2;
-		int32_t y1 = area->y1;
-		int32_t y2 = area->y2;
-		/*Return if the area is out the screen*/
-
-		if(x2 < 0) return;
-		if(y2 < 0) return;
-		if(x1 > TFT_HOR_RES - 1) return;
-		if(y1 > TFT_VER_RES - 1) return;
-
-		/*Truncate the area to the screen*/
-		int32_t act_x1 = x1 < 0 ? 0 : x1;
-		int32_t act_y1 = y1 < 0 ? 0 : y1;
-		int32_t act_x2 = x2 > TFT_HOR_RES - 1 ? TFT_HOR_RES - 1 : x2;
-		int32_t act_y2 = y2 > TFT_VER_RES - 1 ? TFT_VER_RES - 1 : y2;
-
-		x1_flush = act_x1;
-		y1_flush = act_y1;
-		x2_flush = act_x2;
-		y2_fill = act_y2;
-		y_fill_act = act_y1;
-		buf_to_flush = color_p;
-
-		SCB_CleanInvalidateDCache();
-		SCB_InvalidateICache();
-		uint32_t address = hlcd_ltdc.LayerCfg[Lcd_Ctx[0].ActiveLayer].FBStartAdress + (((Lcd_Ctx[0].XSize*area->y1) + area->x1)*Lcd_Ctx[0].BppFactor);
-
-		DMA2D_Config(lv_area_get_width(area));
-
-		HAL_Status = HAL_DMA2D_Start_IT(&hlcd_dma2d,
-									   (uint32_t)buf_to_flush,               /* Color value in Register to Memory DMA2D mode */
-									   address,                              /* DMA2D output buffer */
-									   lv_area_get_width(area),              /* width of buffer in pixels */
-									   lv_area_get_height(area));            /* height of buffer in pixels */
-		  /*##-4- Wait until DMA2D transfer is over ################################################*/
-		  while(transferCompleteDetected == 0) {;}
-
-		  lv_disp_flush_ready(&disp_drv);
-
-		  return;
-
+#if TFT_FULL_REFRESH == 0
+	uint16_t * fb = (uint16_t *) LCD_LAYER_0_ADDRESS;
+	uint16_t stride = disp_drv.hor_res;
+	fb += area->y1 * stride;
+	fb += area->x1;
+	lv_coord_t w = lv_area_get_width(area);
+	int32_t y;
+	for(y = area->y1; y <= area->y2; y++) {
+		lv_memcpy(fb, color_p, w * 2);
+		fb += stride;
+		color_p += w;
+	}
 #else
-		uint16_t * fb = (uint16_t *) LCD_LAYER_0_ADDRESS;
-		uint16_t stride = disp_drv.hor_res;
-		fb += area->y1 * stride;
-		fb += area->x1;
-		lv_coord_t w = lv_area_get_width(area);
-	    int32_t y;
-	    for(y = area->y1; y <= area->y2; y++) {
-			lv_memcpy(fb, color_p, w * 2);
-			fb += stride;
-			color_p += w;
-	    }
-	    lv_disp_flush_ready(&disp_drv);
+	HAL_LTDC_SetAddress(&hlcd_ltdc, color_p, 0);
 #endif
-
+	lv_disp_flush_ready(&disp_drv);
 }
 
 
@@ -260,7 +224,9 @@ static void DMA2D_Config(uint32_t xSize)
   */
 static void TransferComplete(DMA2D_HandleTypeDef *hlcd_dma2d)
 {
-	transferCompleteDetected = 1;
+
+	  lv_disp_flush_ready(&disp_drv);
+//	transferCompleteDetected = 1;
 }
 
 /**

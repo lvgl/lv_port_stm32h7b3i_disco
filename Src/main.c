@@ -32,10 +32,10 @@ int main(void)
 	tft_init();
 	touchpad_init();
 
-	//lv_demo_benchmark();
+	lv_demo_benchmark();
 	//lv_demo_music();
 	//lv_demo_stress();
-	lv_demo_widgets();
+//	lv_demo_widgets();
 
 	while (1)
 	{
